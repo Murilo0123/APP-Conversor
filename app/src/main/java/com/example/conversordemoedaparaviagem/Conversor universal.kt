@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Calculate
@@ -88,7 +89,28 @@ fun ConversorUniversal(modifier: Modifier = Modifier, onTelaInicial: () -> Unit,
             verticalArrangement = Arrangement.Center
         ) {
             //adicionar lista de moedas cadastradas
-
+            Text("Moeda:")
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(1) {
+                    Box(
+                        modifier = Modifier
+                            .border(
+                                width = 1.dp,
+                                color = Color.LightGray,
+                                shape = RoundedCornerShape(8.dp)
+                            )
+                            .padding(4.dp)
+                            .background(
+                                color = Color.White
+                            )
+                    ) {
+                        Text("USD")
+                    }
+                }
+            }
+            Spacer(Modifier.height(16.dp))
             Text("Valor:")
             TextField(
                 value = valorUniversal,
@@ -96,6 +118,7 @@ fun ConversorUniversal(modifier: Modifier = Modifier, onTelaInicial: () -> Unit,
                 placeholder = { Text("Digite o valor") },
                 shape = RoundedCornerShape(12.dp)
             )
+            Text("Cotação: R$ $dolar".replace(".",","), fontSize = 12.sp)
             Spacer(Modifier.height(16.dp))
             Text("Valor convertido:")
             Text(

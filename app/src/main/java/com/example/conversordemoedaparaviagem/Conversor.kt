@@ -102,6 +102,7 @@ fun Conversor(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onTelaIn
                 placeholder = { Text("Digite o valor") },
                 shape = RoundedCornerShape(12.dp)
             )
+            Text("Cotação: R$ $dolar".replace(".",","), fontSize = 12.sp)
             Spacer(Modifier.height(16.dp))
             Text("Valor convertido:")
             Text(
