@@ -20,6 +20,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,6 +30,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.conversordemoedaparaviagem.ui.theme.AmbarMoeda
+import com.example.conversordemoedaparaviagem.ui.theme.AzulProfundo
 
 @Composable
 fun Viagem(modifier: Modifier = Modifier, onTelaInicial: () -> Unit, onConversor: () -> Unit, onAbrirViagem: () -> Unit) {
@@ -46,13 +49,15 @@ fun Viagem(modifier: Modifier = Modifier, onTelaInicial: () -> Unit, onConversor
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.LightGray)
+                .background(AzulProfundo)
                 .padding(16.dp, 32.dp, 16.dp, 0.dp)
         ) {
             Text(
                 text = "Gastos da Viagem".uppercase(),
                 modifier = Modifier.align(Alignment.Center),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
             )
 
             IconButton(
@@ -61,7 +66,8 @@ fun Viagem(modifier: Modifier = Modifier, onTelaInicial: () -> Unit, onConversor
             ) {
                 Icon(
                     imageVector = Icons.Filled.Home,
-                    contentDescription = "Voltar"
+                    contentDescription = "Voltar",
+                    tint = Color.White
                 )
             }
         }
@@ -74,7 +80,8 @@ fun Viagem(modifier: Modifier = Modifier, onTelaInicial: () -> Unit, onConversor
             Text("Total gasto em Real:")
             Text(
                 "R$ 552,00",
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.tertiary
             )
         }
 
@@ -129,7 +136,7 @@ fun Viagem(modifier: Modifier = Modifier, onTelaInicial: () -> Unit, onConversor
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(color = Color.LightGray)
+                .background(color = AzulProfundo)
                 .padding(16.dp)
         ) {
             Row(
@@ -139,14 +146,16 @@ fun Viagem(modifier: Modifier = Modifier, onTelaInicial: () -> Unit, onConversor
                 IconButton(onClick = {onAbrirViagem()}) {
                     Icon(
                         imageVector = Icons.Filled.Luggage,
-                        contentDescription = "Conversor"
+                        contentDescription = "Viagens",
+                        tint = AmbarMoeda
                     )
                 }
 
                 IconButton(onClick = {onConversor()}) {
                     Icon(
                         imageVector = Icons.Filled.Calculate,
-                        contentDescription = "Conversor"
+                        contentDescription = "Conversor",
+                        tint = Color.White
                     )
                 }
             }

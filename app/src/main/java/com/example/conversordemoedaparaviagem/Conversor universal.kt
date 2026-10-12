@@ -16,10 +16,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Luggage
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -35,6 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.conversordemoedaparaviagem.ui.theme.AmbarMoeda
+import com.example.conversordemoedaparaviagem.ui.theme.AzulProfundo
 
 class ConversorUniversalViewModel : ViewModel() {
     var valorUniversal by mutableStateOf("")
@@ -59,14 +60,16 @@ fun ConversorUniversal(modifier: Modifier = Modifier, onTelaInicial: () -> Unit,
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(color = Color.LightGray)
+                .background(color = AzulProfundo)
                 .padding(16.dp). padding(top = 32.dp),
             contentAlignment = Alignment.Center
         ) {
             Text(
                 text = "Conversor Universal".uppercase(),
+                color = Color.White,
                 modifier = Modifier.align(Alignment.Center),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold
             )
         }
 
@@ -77,12 +80,12 @@ fun ConversorUniversal(modifier: Modifier = Modifier, onTelaInicial: () -> Unit,
                 .padding(vertical = 100.dp, horizontal = 16.dp)
                 .weight(1f)
                 .background(
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.surface,
                     shape = RoundedCornerShape(20.dp)
                 )
                 .border(
                     width = 1.dp,
-                    color = Color.LightGray,
+                    color = MaterialTheme.colorScheme.outline,
                     shape = RoundedCornerShape(20.dp)
                 )
                 .padding(16.dp),
@@ -96,17 +99,25 @@ fun ConversorUniversal(modifier: Modifier = Modifier, onTelaInicial: () -> Unit,
                 items(1) {
                     Box(
                         modifier = Modifier
-                            .border(
-                                width = 1.dp,
-                                color = Color.LightGray,
+                            .background(
+                                color = MaterialTheme.colorScheme.primaryContainer,
                                 shape = RoundedCornerShape(8.dp)
                             )
-                            .padding(4.dp)
-                            .background(
-                                color = Color.White
+                            .border(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = RoundedCornerShape(8.dp)
+                            )
+                            .padding(
+                                horizontal = 10.dp,
+                                vertical = 4.dp
                             )
                     ) {
-                        Text("USD")
+                        Text(
+                            "USD",
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            fontWeight = FontWeight.Bold
+                        )
                     }
                 }
             }
@@ -124,14 +135,14 @@ fun ConversorUniversal(modifier: Modifier = Modifier, onTelaInicial: () -> Unit,
             Text(
                 text = resultado?.let {
                     "R$ ${String.format(format = "%.2f", it)}"
-                } ?: "R$ 0,00", fontSize = 20.sp, fontWeight = FontWeight.Bold
+                } ?: "R$ 0,00", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.tertiary
             )
         }
 
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(color = Color.LightGray)
+                .background(color = AzulProfundo)
                 .padding(16.dp)
         ) {
             Row(
@@ -141,14 +152,16 @@ fun ConversorUniversal(modifier: Modifier = Modifier, onTelaInicial: () -> Unit,
                 IconButton(onClick = {onTelaInicial()}) {
                     Icon(
                         imageVector = Icons.Filled.Home,
-                        contentDescription = "Home"
+                        contentDescription = "Home",
+                        tint = Color.White
                     )
                 }
 
                 IconButton(onClick = {onConversorUniversal()}){
                     Icon(
                         imageVector = Icons.Filled.Calculate,
-                        contentDescription = "Conversor"
+                        contentDescription = "Conversor",
+                        tint = AmbarMoeda
                     )
                 }
             }

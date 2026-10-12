@@ -16,11 +16,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Luggage
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,6 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.conversordemoedaparaviagem.ui.theme.AmbarMoeda
+import com.example.conversordemoedaparaviagem.ui.theme.AzulProfundo
 
 class ConversorViewModel : ViewModel() {
     var valor by mutableStateOf("")
@@ -57,13 +60,15 @@ fun Conversor(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onTelaIn
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.LightGray)
+                .background(AzulProfundo)
                 .padding(16.dp, 32.dp, 16.dp, 0.dp)
         ) {
             Text(
                 text = "Conversor".uppercase(),
                 modifier = Modifier.align(Alignment.Center),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
             )
 
             IconButton(
@@ -72,7 +77,8 @@ fun Conversor(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onTelaIn
             ) {
                 Icon(
                     imageVector = Icons.Filled.Home,
-                    contentDescription = "Voltar"
+                    contentDescription = "Voltar",
+                    tint = Color.White
                 )
             }
         }
@@ -84,12 +90,12 @@ fun Conversor(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onTelaIn
                 .padding(vertical = 100.dp, horizontal = 16.dp)
                 .weight(1f)
                 .background(
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.surface,
                     shape = RoundedCornerShape(20.dp)
                 )
                 .border(
                     width = 1.dp,
-                    color = Color.LightGray,
+                    color = MaterialTheme.colorScheme.outline,
                     shape = RoundedCornerShape(20.dp)
                 )
                 .padding(16.dp),
@@ -100,22 +106,39 @@ fun Conversor(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onTelaIn
                 value = valor,
                 onValueChange = { viewModel.onValorChange(it) },
                 placeholder = { Text("Digite o valor") },
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                colors = TextFieldDefaults.colors(
+                        focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+                        unfocusedIndicatorColor = MaterialTheme.colorScheme.primary
+                )
             )
-            Text("Cotação: R$ $dolar".replace(".",","), fontSize = 12.sp)
+            Text(
+                "Cotação: R$ $dolar".replace(".", ","),
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                modifier = Modifier
+                            .padding(top = 8.dp)
+                            .background(
+                                color = MaterialTheme.colorScheme.secondaryContainer,
+                        shape = RoundedCornerShape(6.dp)
+                            )
+                .padding(horizontal = 8.dp, vertical = 3.dp)
+            )
             Spacer(Modifier.height(16.dp))
             Text("Valor convertido:")
             Text(
                 text = resultado?.let {
                     "R$ ${String.format(format = "%.2f", it)}"
-                } ?: "R$ 0,00", fontSize = 20.sp, fontWeight = FontWeight.Bold
+                } ?: "R$ 0,00", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.tertiary
             )
         }
 
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(color = Color.LightGray)
+                .background(color = AzulProfundo)
                 .padding(16.dp)
         ) {
             Row(
@@ -125,14 +148,16 @@ fun Conversor(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onTelaIn
                 IconButton(onClick = {onAbrirViagem()}) {
                     Icon(
                         imageVector = Icons.Filled.Luggage,
-                        contentDescription = "Conversor"
+                        contentDescription = "Conversor",
+                        tint = Color.White
                     )
                 }
 
                 IconButton(onClick = {onConversor()}) {
                     Icon(
                         imageVector = Icons.Filled.Calculate,
-                        contentDescription = "Conversor"
+                        contentDescription = "Conversor",
+                        tint = AmbarMoeda
                     )
                 }
             }

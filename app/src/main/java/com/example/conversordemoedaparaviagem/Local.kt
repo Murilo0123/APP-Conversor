@@ -1,5 +1,6 @@
 package com.example.conversordemoedaparaviagem
 
+import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +23,7 @@ import androidx.compose.material.icons.filled.Luggage
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,6 +32,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.conversordemoedaparaviagem.ui.theme.AmbarMoeda
+import com.example.conversordemoedaparaviagem.ui.theme.AzulProfundo
 
 @Composable
 fun Local(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onConversorUniversal: () -> Unit, onTelaInicial: () -> Unit) {
@@ -40,11 +44,11 @@ fun Local(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onConversorU
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(color = Color.LightGray)
+                .background(color = AzulProfundo)
                 .padding(16.dp). padding(top = 32.dp),
             contentAlignment = Alignment.Center
         ) {
-            Text("Conversor de Viagem".uppercase())
+            Text("Conversor de Viagem".uppercase(), fontWeight = FontWeight.Bold, color = Color.White)
         }
         Spacer(Modifier.height(32.dp))
 
@@ -61,11 +65,12 @@ fun Local(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onConversorU
                     .fillMaxWidth()
                     .border(
                         width = 1.dp,
-                        color = Color.LightGray,
+                        color = MaterialTheme.colorScheme.outline,
                         shape = RoundedCornerShape(12.dp)
                     )
                     .background(
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.surface,
+                        shape = RoundedCornerShape(12.dp)
                     )
                     .padding(16.dp)
             ) {
@@ -80,7 +85,7 @@ fun Local(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onConversorU
                     ) {
                         Text(
                             text = "USD".uppercase(),
-                            color = Color.Gray
+                            color = MaterialTheme.colorScheme.primary
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
@@ -123,7 +128,7 @@ fun Local(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onConversorU
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(color = Color.LightGray)
+                .background(color = AzulProfundo)
                 .padding(16.dp)
         ) {
             Row(
@@ -133,14 +138,16 @@ fun Local(modifier: Modifier = Modifier, onAbrirViagem: () -> Unit, onConversorU
                 IconButton(onClick = {onTelaInicial()}) {
                     Icon(
                         imageVector = Icons.Filled.Home,
-                        contentDescription = "Home"
+                        contentDescription = "Home",
+                        tint = AmbarMoeda
                     )
                 }
 
                 IconButton(onClick = {onConversorUniversal()}){
                     Icon(
                         imageVector = Icons.Filled.Calculate,
-                        contentDescription = "Conversor"
+                        contentDescription = "Conversor",
+                        tint = Color.White
                     )
                 }
             }
